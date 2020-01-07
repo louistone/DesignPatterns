@@ -1,0 +1,24 @@
+// Observable
+extends Observable
+public void measurementsChanged() {
+  setChanged();
+  notifyObservers();
+}
+
+public void setMeasurements() {
+  mesurementsChanged();
+}
+
+// Observer
+implements Observer, DisplayElement
+public ForecastDisplay(Observable observable) {
+  observable.addObserver(this);
+}
+
+public void update(Observable observable, Object arg) {
+  if (observable instanceof WeatherData) {
+    WeatherData weatherData = (WeatherData)observable;
+    display();
+  }
+}
+
